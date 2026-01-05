@@ -209,4 +209,13 @@ function uiy() {
   document.getElementById("output").innerHTML = "ممنون از نظر شما<br>تعداد نظرها: " + conh;
   document.getElementById("likeBtn").disabled = true; // دکمه غیرفعال
 }
+// بروزرسانی زنده تعداد لایک‌ها هر 3 ثانیه
+setInterval(() => {
+    let currentLikes = parseInt(localStorage.getItem("myConh")) || 0;
+    let liked = localStorage.getItem("liked") === "true";
+    let message = liked
+        ? "تعداد لایک‌ها: " + currentLikes + "<br> شما قبلاً لایک کرده‌اید!"
+        : currentLikes + " نفر لایک کرده‌اند";
+    document.getElementById("output").innerHTML = message;
+}, 3000);
 </script>
