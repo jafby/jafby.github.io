@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نظرات کاربران</title>
+  <style>
+    :root{
+      --bg: #0f172a;            /* slate-900 */
+      --card: #111827;         /* gray-900 */
+      --text: #e5e7eb;         /* gray-200 */
+      --muted: #9ca3af;        /* gray-400 */
+      --accent: #22c55e;       /* green-500 */
+      --accent-weak: #16a34a;  /* green-600 */
+      --bar-bg: #1f2937;       /* gray-800 */
+      --border: #1f2937;       /* gray-800 */
+      --star: #fbbf24;         /* amber-400 */
+      --shadow: 0 12px 30px rgba(0,0,0,0.35);
+      --radius: 14px;
+    }
+
+    /* Page */
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% 10%, #0b1227 0%, var(--bg) 55%, #0b1227 100%);
+      color: var(--text);
+      font-family: "Vazirmatn", "IRANSans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Segoe UI Emoji", "Apple Color Emoji";
+      min-height: 100vh;
+      display:grid;
+      place-items:center;
+      padding: 24px;
+    }
+
+    /* Card */
+    .rating-card{
+      width: min(720px, 92vw);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%), var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .rating-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(6px);
+    }
+
+    .rating-summary{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      flex-wrap:wrap;
+    }
+
+    .rating-number{
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 800;
+      letter-spacing:-0.02em;
+      color: #ffffff;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .stars-inline{
+      display:flex;
+      gap:4px;
+      align-items:center;
+    }
+    .star{
+      color: var(--star);
+      font-size: clamp(18px, 4vw, 22px);
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+    }
+
+    .vote-count{
+      color: var(--muted);
+      font-size: 14px;
+      white-space:nowrap;
+    }
+
+    /* Body */
+    .rating-body{
+      padding: 20px 22px 24px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    /* Row */
+    .rating-row{
+      display:grid;
+      grid-template-columns: auto 1fr auto;
+      align-items:center;
+      gap: 14px;
+    }
+
+    .label{
+      color:#d1d5db;
+      font-weight:700;
+      letter-spacing:0.02em;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .bar{
+      position:relative;
+      height: 12px;
+      background: linear-gradient(180deg, #111827 0%, var(--bar-bg) 100%);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow:hidden;
+    }
+
+    .bar-fill{
+      position:absolute;
+      inset:0;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-weak) 100%);
+      border-right: 1px solid rgba(255,255,255,0.15);
+      box-shadow: inset 0 0 6px rgba(255,255,255,0.12), 0 2px 6px rgba(0,0,0,0.35);
+      transition: width 800ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .count{
+      color:#cbd5e1;
+      font-variant-numeric: tabular-nums;
+      font-weight:600;
+      min-width: 28px;
+      text-align:left;
+    }
+
+    /* Footer tip */
+    .tip{
+      margin: 6px 22px 22px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px dashed var(--border);
+      padding-top: 12px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:480px){
+      .rating-header{ padding: 16px; }
+      .rating-body{ padding: 16px; }
+      .rating-row{ gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="rating-card" aria-label="خلاصه نظرات کاربران">
+    <!-- Header: Average + votes -->
+    <div class="rating-header">
+      <div class="rating-summary">
+        <div class="rating-number">
+          <span>۵ از ۵</span>
+          <span class="stars-inline" aria-hidden="true">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </span>
+        </div>
+      </div>
+      <div class="vote-count">نظرات کاربران - ۱۱ رأی</div>
+    </div>
+
+    <!-- Body: Distribution rows -->
+    <div class="rating-body">
+      <!-- 5 stars -->
+      <div class="rating-row" aria-label="۵ ستاره">
+        <div class="label">۵ ★</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+          <div class="bar-fill" style="width: 80%;"></div>
+        </div>
+        <div class="count">۸</div>
+      </div>
+
+      <!-- 4 stars -->
+      <div class="rating-row" aria-label="۴ ستاره">
+        <div class="label">۴ ★</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10">
+          <div class="bar-fill" style="width: 10%;"></div>
+        </div>
+        <div class="count">۱</div>
+      </div>
+
+      <!-- 3 stars -->
+      <div class="rating-row" aria-label="۳ ستاره">
+        <div class="label">۳ ★</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10">
+          <div class="bar-fill" style="width: 10%;"></div>
+        </div>
+        <div class="count">۱</div>
+      </div>
+
+      <!-- 2 stars -->
+      <div class="rating-row" aria-label="۲ ستاره">
+        <div class="label">۲ ★</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="bar-fill" style="width: 0%;"></div>
+        </div>
+        <div class="count">۰</div>
+      </div>
+
+      <!-- 1 star -->
+      <div class="rating-row" aria-label="۱ ستاره">
+        <div class="label">۱ ★</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="bar-fill" style="width: 0%;"></div>
+        </div>
+        <div class="count">۰</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+</body>
+</html>
