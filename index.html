@@ -156,7 +156,7 @@ position: fixed;
         width="300">
     </div>
 
-    <p id="output"></p>
+    
 
     <p>
       زیگ‌زاگ یه بازی ساده‌ست، اما خیلی زود می‌فهمی که چقدر می‌تونه هیجان‌انگیز باشه. فقط کافیه با یه لمس مسیرت رو عوض کنی و روی راه‌های شکسته و زیگ‌زاگی حرکت کنی. هر پیچ یه چالش جدیده، هر لحظه یه تصمیم تازه. اگه تمرکزت رو حفظ کنی، رکوردهای بزرگ منتظرته. بازی سبک و سریع اجرا میشه، پس هر جا و هر وقت می‌تونی امتحانش کنی. حتی وقتی اینترنت نداری، باز هم می‌تونی رکورد بزنی. ظاهر بازی مینیمال و تمیزه، تا حواست فقط به حرکت باشه. رنگ‌ها و افکت‌ها باعث میشن هر بار تجربه تازه‌ای داشته باشی. موسیقی و صداها هم همراهت هستن تا هیجان رو بیشتر کنن. کنترل‌ها خیلی ساده‌ان، اما حرفه‌ای شدن زمان می‌بره. هر بار که بازی می‌کنی، می‌تونی بهتر بشی و رکورد بالاتری بزنی. دوست داری با بقیه رقابت کنی؟ رکوردت رو به اشتراک بذار. چالش‌های روزانه و هفتگی هم هستن تا همیشه انگیزه داشته باشی. زیگ‌زاگ برای همه‌ست؛ چه تازه‌کار باشی چه حرفه‌ای. این بازی یه تست واقعی از سرعت و تمرکزته. هر پیچ فرصتیه برای نشون دادن مهارتت. پس آماده شو، لمس کن و حرکت کن. زیگ‌زاگ منتظرته تا رکورد تازه‌ای ثبت کنی. بیا ببین تا کجا می‌تونی پیش بری. هر بار یه تجربه جدیده، هر بار یه ماجراجویی تازه. زیگ‌زاگ فقط یه بازی نیست، یه همراه برای لحظه‌های خالیته. وقتی شروع کنی، دیگه سخت میشه ولش کنی. بازی سبک، سریع و پرانرژیه. یه لمس کوچیک، یه تغییر بزرگ. همه‌چی به واکنش تو بستگی داره. زیگ‌زاگ ساده‌ست، اما هیچ‌وقت تکراری نمیشه. هر بار که برگردی، یه رکورد تازه در انتظارت هست. بیا رکوردت رو بشکن و به بقیه نشون بده. زیگ‌زاگ هم تفریحیه، هم چالش‌برانگیز. یه بازی که می‌تونه دوست همیشگی گوشی‌ت باشه. پس همین حالا شروع کن و ببین تا کجا می‌تونی بری. زیگ‌زاگ آماده‌ست، فقط منتظر لمس توست. بیا با هم رکوردهای تازه بسازیم. زیگ‌زاگ، جایی که هر پیچ یه ماجراجوییه.
@@ -183,8 +183,8 @@ position: fixed;
     </button>
 
     <br><br>
-
-    <button id="likeBtn" onclick="uiy()">لایک کردن</button>
+<p id="counter">نفر لایک کردن</p>
+    <button id="addBtn">لایک کردن</button>
 
     <p id="cv">تمامی حقوق محفوظ است</p>
 
@@ -252,5 +252,140 @@ position: fixed;
         document.getElementById("likeBtn").disabled = true;
       }
     </script>
+
+
+  <script>
+    const BIN_ID = "695edc1dd0ea881f405ba8a8";
+    const API_KEY = "$2a$10$RhO6naHW1GEy0OyI9nTP9.a4yyeILNW6ha2b3eg5ga9KTtRX8.3Tm";
+    const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+    const LATEST_URL = `${API_URL}/latest`;
+
+    // انیمیشن شمارنده
+    function animateCounter(from, to, duration = 800) {
+      const counter = document.getElementById("counter");
+      const startTime = performance.now();
+
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(from + (to - from) * progress);
+        counter.textContent = value;
+
+        if (progress < 1) requestAnimationFrame(update);
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // گرفتن مقدار از JSONBin
+    async function loadCounter() {
+      const res = await fetch(LATEST_URL, {
+        headers: { "X-Master-Key": API_KEY }
+      });
+      const data = await res.json();
+      animateCounter(0, data.record.likes);
+    }
+
+    // افزایش مقدار
+    async function increase() {
+      const res = await fetch(LATEST_URL, {
+        headers: { "X-Master-Key": API_KEY }
+      });
+      const data = await res.json();
+
+      const newValue = data.record.likes + 1;
+
+      await fetch(API_URL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": API_KEY
+        },
+        body: JSON.stringify({ likes: newValue })
+      });
+
+      animateCounter(data.record.likes, newValue);
+    }
+
+    document.getElementById("addBtn").addEventListener("click", increase);
+
+    loadCounter();
+    
+    let firstLoad = true;
+
+function animateCounter(from, to, duration = 800) {
+  const counter = document.getElementById("counter");
+  const startTime = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const value = Math.floor(from + (to - from) * progress);
+    counter.textContent = value;
+
+    if (progress < 1) requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+}
+
+async function loadCounter() {
+  const res = await fetch(LATEST_URL, {
+    headers: { "X-Master-Key": API_KEY }
+  });
+  const data = await res.json();
+
+  if (firstLoad) {
+    animateCounter(0, data.record.likes);
+    firstLoad = false;
+  } else {
+    document.getElementById("counter").textContent = data.record.likes;
+  }
+
+  // اگر قبلاً لایک کرده باشد، دکمه را غیرفعال کن
+  if (localStorage.getItem("liked") === "yes") {
+    document.getElementById("addBtn").disabled = true;
+    document.getElementById("addBtn").textContent = "قبلاً رأی دادی";
+  }
+}
+
+async function increase() {
+  // جلوگیری از لایک دوباره
+  if (localStorage.getItem("liked") === "yes") {
+    alert("شما قبلاً نظر داده‌اید");
+    return;
+  }
+
+  const res = await fetch(LATEST_URL, {
+    headers: { "X-Master-Key": API_KEY }
+  });
+  const data = await res.json();
+
+  const newValue = data.record.likes + 1;
+
+  await fetch(API_URL, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Master-Key": API_KEY
+    },
+    body: JSON.stringify({ likes: newValue })
+  });
+
+  // ذخیره اینکه کاربر لایک کرده
+  localStorage.setItem("liked", "yes");
+
+  // دکمه را غیرفعال کن
+  document.getElementById("addBtn").disabled = true;
+  document.getElementById("addBtn").textContent = "قبلاً رأی دادی";
+
+  document.getElementById("counter").textContent = newValue;
+}
+
+document.getElementById("addBtn").addEventListener("click", increase);
+
+loadCounter();
+  </script>
+
+</body>
+</html>
   </body>
 </html>
