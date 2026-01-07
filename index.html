@@ -1,253 +1,230 @@
-<html long="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
   <head>
-    <link rel="icon" href="bazi.ico" sizes="any">
-<link rel="icon" type="image/png" href="bazi.png">
-<link rel="apple-touch-icon" href="bazi.png">
-<title>بازی ایرانی زیگزاگ</title>
-    <meta name="description" content="زیگ‌زاگ یک بازی ایرانی سرگرم‌کننده و چالش‌برانگیز است؛ با گیم‌پلی ساده اما اعتیادآور، طراحی مینیمال و مراحل متنوع که شما را ساعت‌ها سرگرم می‌کند. همین حالا تجربه کنید!">
-<meta name="robots" content="index, follow" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-<meta name="google-site-verification" content="IQ5iVAE94LG7SgyUKhN3laEfWAPuWWU5Zs4O3N9Dih4" />
+    <title>بازی ایرانی زیگزاگ</title>
 
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <!-- توضیحات برای سئو -->
+    <meta name="description" content="زیگ‌زاگ یک بازی ایرانی سرگرم‌کننده و چالش‌برانگیز است؛ با گیم‌پلی ساده اما اعتیادآور، طراحی مینیمال و مراحل متنوع که شما را ساعت‌ها سرگرم می‌کند. همین حالا تجربه کنید!">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- آیکن‌ها -->
+    <link rel="icon" href="bazi.ico" sizes="any">
+    <link rel="icon" type="image/png" href="bazi.png">
+    <link rel="apple-touch-icon" href="bazi.png">
+
+    <!-- تأییدیه گوگل -->
+    <meta name="google-site-verification" content="IQ5iVAE94LG7SgyUKhN3laEfWAPuWWU5Zs4O3N9Dih4">
+
+    <!-- فونت وزیرمتن -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css">
+
+    <!-- فونت آیکن‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+      /* انیمیشن بالا و پایین */
+      @keyframes upDown {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      body {
+        font-family: 'Vazirmatn', sans-serif;
+        background-color: #EEEEEE;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      div {
+        text-align: center;
+      }
+
+      #hj {
+        animation: upDown 2.5s infinite;
+        margin-top: 40px;
+      }
+
+      #main-icon {
+        border-radius: 8px;
+      }
+
+      p {
+        font-family: 'Vazirmatn', sans-serif;
+        line-height: 1.8;
+        padding: 0 16px;
+      }
+
+      #counter {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333;
+        margin-top: 8px;
+      }
+
+      h1 {
+        margin: 8px 0;
+      }
+
+      button {
+        background: #45a049;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        margin: 8px;
+      }
+
+      button:hover {
+        background-color: #3d9142;
+      }
+
+      button:active {
+        transform: scale(0.95) translateY(2px);
+        box-shadow: 5px 5px 10px grey;
+      }
+
+      #scrollTopBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 16px 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 100%;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      #scrollTopBtn:hover {
+        background-color: #45a049;
+      }
+
+      #cv {
+        margin-top: 40px;
+        width: 100%;
+        background-color: #999999;
+        color: white;
+        border-top: 2px solid #666666;
+        padding: 12px 0;
+        font-size: 14px;
+      }
+    </style>
   </head>
 
   <body>
-      <br><br>
-      <div id="hj">
-       <img id="imn" src="https://s.cafebazaar.ir/images/icons/studio.RayMoon.ZigzagRacer-7cea0dfd-eb53-4738-99cb-d33849752b3b_512x512.png?x-img=v1/format,type_webp,lossless_false/resize,h_128,w_128,lossless_false/optimize" alt="00" width="300px">
-   
-       </div>
-      <br><br>
-      <p id="output"></p>
-        زیگ‌زاگ یه بازی ساده‌ست، اما خیلی زود می‌فهمی که چقدر می‌تونه هیجان‌انگیز باشه.فقط کافیه با یه لمس مسیرت رو عوض کنی و روی راه‌های شکسته و زیگ‌زاگی حرکت کنی.هر پیچ یه چالش جدیده، هر لحظه یه تصمیم تازه.اگه تمرکزت رو حفظ کنی، رکوردهای بزرگ منتظرته.بازی سبک و سریع اجرا میشه، پس هر جا و هر وقت می‌تونی امتحانش کنی.حتی وقتی اینترنت نداری، باز هم می‌تونی رکورد بزنی.ظاهر بازی مینیمال و تمیزه، تا حواست فقط به حرکت باشه.رنگ‌ها و افکت‌ها باعث میشن هر بار تجربه تازه‌ای داشته باشی.موسیقی و صداها هم همراهت هستن تا هیجان رو بیشتر کنن.کنترل‌ها خیلی ساده‌ان، اما حرفه‌ای شدن زمان می‌بره.هر بار که بازی می‌کنی، می‌تونی بهتر بشی و رکورد بالاتری بزنی.دوست داری با بقیه رقابت کنی؟ رکوردت رو به اشتراک بذار.چالش‌های روزانه و هفتگی هم هستن تا همیشه انگیزه داشته باشی.زیگ‌زاگ برای همه‌ست؛ چه تازه‌کار باشی چه حرفه‌ای.این بازی یه تست واقعی از سرعت و تمرکزته.هر پیچ فرصتیه برای نشون دادن مهارتت.پس آماده شو، لمس کن و حرکت کن.زیگ‌زاگ منتظرته تا رکورد تازه‌ای ثبت کنی.بیا ببین تا کجا می‌تونی پیش بری.هر بار یه تجربه جدیده، هر بار یه ماجراجویی تازه.زیگ‌زاگ فقط یه بازی نیست، یه همراه برای لحظه‌های خالیته.وقتی شروع کنی، دیگه سخت میشه ولش کنی.بازی سبک، سریع و پرانرژیه.یه لمس کوچیک، یه تغییر بزرگ.همه‌چی به واکنش تو بستگی داره.زیگ‌زاگ ساده‌ست، اما هیچ‌وقت تکراری نمیشه.هر بار که برگردی، یه رکورد تازه در انتظارت هست.بیا رکوردت رو بشکن و به بقیه نشون بده.زیگ‌زاگ هم تفریحیه، هم چالش‌برانگیز.یه بازی که می‌تونه دوست همیشگی گوشی‌ت باشه.پس همین حالا شروع کن و ببین تا کجا می‌تونی بری.زیگ‌زاگ آماده‌ست، فقط منتظر لمس توست.بیا با هم رکوردهای تازه بسازیم.زیگ‌زاگ، جایی که هر پیچ یه ماجراجوییه 
-      </p>
-      <br>
-<div id="counter"><h1>+10</h1></div>
-    <h1>نصب فعال</h1>
-    <br>
-    <a href="./nazar.html">
-  <button>دیدن نظرات بازار</button>
-    </a>
-    <br>
-      <a href="http://cafebazaar.ir/app/?id=studio.RayMoon.ZigzagRacer&ref=share" >
-         <img id="imn" src="https://cdn.developers.cafebazaar.ir/2021/05/bazaar-badge2.png" alt="00" width="190px">
-         </a>
-  <button id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
-   
-      <br>
+    <div id="hj">
+      <img
+        id="main-icon"
+        src="https://s.cafebazaar.ir/images/icons/studio.RayMoon.ZigzagRacer-7cea0dfd-eb53-4738-99cb-d33849752b3b_512x512.png?x-img=v1/format,type_webp,lossless_false/resize,h_128,w_128,lossless_false/optimize"
+        alt="آیکن بازی زیگزاگ"
+        width="300">
+    </div>
 
-<br>
-<button onclick="uiy()">لایک کردن</button>
-      <p id="cv">تمامی حقوق محفوظ است</p>
-      <p id="cvt"></p>
+    <p id="output"></p>
+
+    <p>
+      زیگ‌زاگ یه بازی ساده‌ست، اما خیلی زود می‌فهمی که چقدر می‌تونه هیجان‌انگیز باشه. فقط کافیه با یه لمس مسیرت رو عوض کنی و روی راه‌های شکسته و زیگ‌زاگی حرکت کنی. هر پیچ یه چالش جدیده، هر لحظه یه تصمیم تازه. اگه تمرکزت رو حفظ کنی، رکوردهای بزرگ منتظرته. بازی سبک و سریع اجرا میشه، پس هر جا و هر وقت می‌تونی امتحانش کنی. حتی وقتی اینترنت نداری، باز هم می‌تونی رکورد بزنی. ظاهر بازی مینیمال و تمیزه، تا حواست فقط به حرکت باشه. رنگ‌ها و افکت‌ها باعث میشن هر بار تجربه تازه‌ای داشته باشی. موسیقی و صداها هم همراهت هستن تا هیجان رو بیشتر کنن. کنترل‌ها خیلی ساده‌ان، اما حرفه‌ای شدن زمان می‌بره. هر بار که بازی می‌کنی، می‌تونی بهتر بشی و رکورد بالاتری بزنی. دوست داری با بقیه رقابت کنی؟ رکوردت رو به اشتراک بذار. چالش‌های روزانه و هفتگی هم هستن تا همیشه انگیزه داشته باشی. زیگ‌زاگ برای همه‌ست؛ چه تازه‌کار باشی چه حرفه‌ای. این بازی یه تست واقعی از سرعت و تمرکزته. هر پیچ فرصتیه برای نشون دادن مهارتت. پس آماده شو، لمس کن و حرکت کن. زیگ‌زاگ منتظرته تا رکورد تازه‌ای ثبت کنی. بیا ببین تا کجا می‌تونی پیش بری. هر بار یه تجربه جدیده، هر بار یه ماجراجویی تازه. زیگ‌زاگ فقط یه بازی نیست، یه همراه برای لحظه‌های خالیته. وقتی شروع کنی، دیگه سخت میشه ولش کنی. بازی سبک، سریع و پرانرژیه. یه لمس کوچیک، یه تغییر بزرگ. همه‌چی به واکنش تو بستگی داره. زیگ‌زاگ ساده‌ست، اما هیچ‌وقت تکراری نمیشه. هر بار که برگردی، یه رکورد تازه در انتظارت هست. بیا رکوردت رو بشکن و به بقیه نشون بده. زیگ‌زاگ هم تفریحیه، هم چالش‌برانگیز. یه بازی که می‌تونه دوست همیشگی گوشی‌ت باشه. پس همین حالا شروع کن و ببین تا کجا می‌تونی بری. زیگ‌زاگ آماده‌ست، فقط منتظر لمس توست. بیا با هم رکوردهای تازه بسازیم. زیگ‌زاگ، جایی که هر پیچ یه ماجراجوییه.
+    </p>
+
+    <div id="counter">+10</div>
+    <h1>نصب فعال</h1>
+
+    <a href="./nazar.html">
+      <button>دیدن نظرات بازار</button>
+    </a>
+
+    <br>
+
+    <a href="http://cafebazaar.ir/app/?id=studio.RayMoon.ZigzagRacer&ref=share">
+      <img
+        src="https://cdn.developers.cafebazaar.ir/2021/05/bazaar-badge2.png"
+        alt="دانلود از کافه بازار"
+        width="190">
+    </a>
+
+    <button id="scrollTopBtn" aria-label="بازگشت به بالا">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <br><br>
+
+    <button id="likeBtn" onclick="uiy()">لایک کردن</button>
+
+    <p id="cv">تمامی حقوق محفوظ است</p>
+
+    <script>
+      // دکمه اسکرول به بالا
+      document.getElementById("scrollTopBtn").addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+
+      // خواندن تعداد لایک‌ها از localStorage
+      let conh = localStorage.getItem("myCount");
+      if (!conh) {
+        conh = 0;
+      } else {
+        conh = parseInt(conh);
+      }
+
+      // نمایش اولیه
+      function updateOutputInitial() {
+        const liked = localStorage.getItem("liked") === "true";
+        const output = document.getElementById("output");
+        if (liked) {
+          document.getElementById("likeBtn").disabled = true;
+          output.innerHTML = "شما قبلاً لایک کرده‌اید!<br>تعداد لایک‌ها: " + conh;
+        } else {
+          output.innerHTML = conh + " نفر لایک کرده‌اند";
+        }
+      }
+
+      updateOutputInitial();
+
+      // تابع لایک
+      function uiy() {
+        if (localStorage.getItem("liked") === "true") {
+          return;
+        }
+
+        // انیمیشن شمارشگر (مثال: از مقدار فعلی تا مقدار جدید)
+        let start = conh;
+        conh++;
+        let end = conh;
+
+        localStorage.setItem("myCount", conh);
+        localStorage.setItem("liked", "true");
+
+        let duration = 800;
+        let steps = end - start || 1;
+        let stepTime = Math.abs(Math.floor(duration / steps));
+        let current = start;
+        let counter = document.getElementById("counter");
+
+        let timer = setInterval(() => {
+          current++;
+          counter.textContent = current;
+          if (current >= end) {
+            clearInterval(timer);
+          }
+        }, stepTime);
+
+        document.getElementById("output").innerHTML =
+          "ممنون از لایک شما 💚<br>تعداد لایک‌ها: " + conh;
+        document.getElementById("likeBtn").disabled = true;
+      }
+    </script>
   </body>
 </html>
-<style>
-/* تعریف انیمیشن عمومی */
-@keyframes upDown {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-#hj {
-  animation: upDown 2.5s infinite;
-}
-  #load {
-    loader:16px solid blue;
-    border-top: 16px solid red;
-    border-bottom: 16px solid blue;
-    border-left:16px solid yellow;
-    border-right:16px solid green;
-    
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
-  
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg);
-  }
-}
-#scrollTopBtn {
-  position: fixed;       /* همیشه روی صفحه باشه */
-  bottom: 20px;          /* فاصله از پایین */
-  right: 20px;           /* فاصله از راست */
-  padding: 16px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 100%;
-  cursor: pointer;
-}
-
-#scrollTopBtn:hover {
-  background-color: #45a049;
-}
-#btn {
-  width: 50%;
-  border-radius: 8px;
-  background-color:#00BFFF;
-}
-#btn:active{
-  animation:fg 0.8s infinite;
- transform:  translate: (0px, 50px);
-  
-}
-#imn {
-  margin-top: 50px;
-  border-radius: 8px;
-  z-index: 8;
-  animation:upDown 3s infinite;
-}
-@keyframes baz{
-  from{translate:(0px,0px);}
-  to{translate:(0px,45px);}
-}
-@keyframes fg{
-  from{translate:(0px,0px);}
-  to{translate:(0px,45px);}
-}
-button {
-  background: #45a049;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-button:active {
-  transform: scale(0.95) translateY(2px);
-  box-shadow: 5px 5px 10px grey;
-}
-#ty {
-  justify-content:center;
-  text-align: center;
-  width: 100%;
-  height: 25%;
-  align-items: center;
-  border-radius: 7px;
-  animation: ft 2.5s infinite;
-  background-color: red;
-  
-}
-@keyframes ft{
-  0%{
-    background-color: red;
-  }
-  25%{
-    background-color: green;
-  }
-  50%{
-    background-color: #00BFFF;
-  }
-  100%{
-    background-color: yellow;
-  }
-}
-body{
-  font-family: 'Vazirmatn';
-  background-color: #EEEEEE;
-  align-items: center;
-  text-align: center;
-}
-div {
-  align-items: center;
-  text-align: center;
-}
-p{
-  
-font-family: 'Vazirmatn';
-   align-items: center;
-  text-align: center;
-}
-#cv {
-  margin-top: 20px;
-  width: 100%;
-  height: 11%;
-  background-color: #999999;
-  color: white;
-  border: 2px solid #666666;
-}
-h5 {
-  body {
-  font-family: 'Vazirmatn', sans-serif;
-}
-}
-</style>
-<script>
-  document.getElementById("scrollTopBtn").addEventListener("click", function() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"   // حرکت نرم به بالا
-  });
-});
-  window.addEventListener("load", function() {
-    document.getElementById("load").style.display = "none";
-    document.getElementById("content").style.display = "block";
-});
-// مقدار اولیه رو از localStorage بخون
-let conh = localStorage.getItem("myCount");
-if (!conh) {
-  conh = 0;
-} else {
-  conh = parseInt(conh);
-}
-
-// نمایش مقدار فعلی
-document.getElementById("output").innerHTML =conh+"نفر لایک کردن"
-// بررسی اینکه کاربر قبلاً کلیک کرده یا نه
-if (localStorage.getItem("liked") === "true") {
-  document.getElementById("likeBtn").disabled = true;
-  document.getElementById("output").innerHTML = "شما قبلاً نظر دادید!<br>تعداد نظرها: " + conh;
-}
-
-// تابع کلیک
-function uiy() {
-  if (localStorage.getItem("liked") === "true") {
-    return; // اگر قبلاً کلیک کرده، هیچ کاری نکن
-  }
-  
-
-let target = 10; // عدد نهایی
-let duration = 2000; // مدت زمان انیمیشن (میلی‌ثانیه)
-let stepTime = Math.abs(Math.floor(duration / target));
-let current = 0;
-let counter = document.getElementById("counter");
-
-let timer = setInterval(() => {
-  current++;
-  counter.textContent = current;
-  if (current >= target) {
-    clearInterval(timer);
-  }
-}, stepTime);
-</script>
-<script>
-  conh++;
-  localStorage.setItem("myCount", conh);   // ذخیره تعداد
-  localStorage.setItem("liked", "true");   // علامت‌گذاری که کاربر کلیک کرده
-  document.getElementById("output").innerHTML = "ممنون از نظر شما<br>تعداد نظرها: " + conh;
-  document.getElementById("likeBtn").disabled = true; // دکمه غیرفعال
-}
-// بروزرسانی زنده تعداد لایک‌ها هر 3 ثانیه
-setInterval(() => {
-    let currentLikes = parseInt(localStorage.getItem("conh")) || 0;
-    let liked = localStorage.getItem("liked") === "true";
-    let message = liked
-        ? "تعداد لایک‌ها: " + currentLikes + "<br> شما قبلاً لایک کرده‌اید!"
-        : currentLikes + " نفر لایک کرده‌اند";
-    document.getElementById("output").innerHTML = message;
-}, 3000);
-</script>
