@@ -148,6 +148,10 @@ position: fixed;
     <a href="#">آلبوم</a>
      </nav>
     </header>
+<div>
+  👁️ کل بازدیدها: <span id="total">0</span><br>
+  📅 بازدید امروز: <span id="today">0</span>
+</div>
     <div id="hj">
       <img
         id="main-icon"
@@ -383,6 +387,58 @@ async function increase() {
 document.getElementById("addBtn").addEventListener("click", increase);
 
 loadCounter();
+// فقط این دو مقدار رو جایگزین کن
+const BIN_ID = "695f818fae596e708fcd4d76";
+
+const API_KEY = "$2a$10$RhO6naHW1GEy0OyI9nTP9.a4yyeILNW6ha2b3eg5ga9KTtRX8.3Tm";
+
+const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const LATEST_URL = `${API_URL}/latest`;
+
+async function updateViews() {
+  try {
+    // خواندن داده فعلی از JSONBin
+    const res = await fetch(LATEST_URL, {
+      headers: { "X-Master-Key": API_KEY }
+    });
+    const data = await res.json();
+    let record = data.record;
+
+    // تاریخ امروز (YYYY-MM-DD)
+    const today = new Date().toISOString().split("T")[0];
+
+    // افزایش کل بازدیدها
+    record.totalViews += 1;
+
+    // بررسی تاریخ برای بازدید امروز
+    if (record.lastDate === today) {
+      record.todayViews += 1;
+    } else {
+      record.todayViews = 1;
+      record.lastDate = today;
+    }
+
+    // ذخیرهٔ دادهٔ جدید در JSONBin
+    await fetch(API_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": API_KEY
+      },
+      body: JSON.stringify(record)
+    });
+
+    // نمایش روی صفحه
+    document.getElementById("total").textContent = record.totalViews;
+    document.getElementById("today").textContent = record.todayViews;
+
+  } catch (err) {
+    console.error("خطا در اتصال به JSONBin:", err);
+  }
+}
+
+// اجرای شمارنده هنگام بارگذاری صفحه
+updateViews();
   </script>
 
 </body>
