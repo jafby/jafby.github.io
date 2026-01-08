@@ -440,6 +440,32 @@ async function updateViews() {
 
 // اجرای شمارنده هنگام بارگذاری صفحه
 updateViews();
+
+//لایک
+document.addEventListener("DOMContentLoaded", () => {
+  loadCounter();
+  document.getElementById("addBtn").addEventListener("click", increase);
+});
+
+async function loadCounter() {
+  try {
+    const res = await fetch(LATEST_URL, {
+      headers: { "X-Master-Key": API_KEY }
+    });
+    const data = await res.json();
+    const likes = data.record.likes ?? 0;
+
+    animateCounter(0, likes);
+
+    if (localStorage.getItem("liked") === "yes") {
+      const btn = document.getElementById("addBtn");
+      btn.disabled = true;
+      btn.textContent = "قبلاً رأی دادی";
+    }
+  } catch (err) {
+    console.error("خطا در دریافت لایک‌ها:", err);
+  }
+}
   </script>
 
 </body>
