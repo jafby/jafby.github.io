@@ -136,7 +136,20 @@ position: fixed;
         font-size: 14px;
       }
 #likeCount{
-font-size:24px;
+font-size:27px;
+}
+#likeBtn{
+        background: lightred;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        margin: 8px;
+}
+#likeBtn:active{
+     transform: scale(0.95) translateY(2px);
 }
     </style>
   </head>
@@ -187,11 +200,11 @@ font-size:24px;
 
     <br><br>
 <div id="counterEl">
-<span id="likeCount">0 نفر لایک کردن</span>
+<span id="likeCount">درحال بارگذاری...</span>
 <p>نفر لایک کردن</p>
 </div>
 <br>
-<button id="likeBtn">لایک</button>
+<button id="likeBtn">لایک کردن</button>
 
     <p id="cv">تمامی حقوق محفوظ است</p>
 
